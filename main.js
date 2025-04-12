@@ -29,22 +29,41 @@ function listBooks(){
 }
 function markAsRead(title){
     const book = library.find(book => book.title.toLowerCase() === title.toLowerCase());
+    if(book){
+        if (book.isRead) {
+            alert(`"${book.title}" is already marked as read.`);
+        }
+        else {
+            book.isRead=true;
+            alert("Marked as read");
+        }
+    }
+    else
+      alert("Book not found.");
+    }
 
-    if (book) {
-      book.isRead = true;
-      alert(`"${book.title}" is marked as read.`);
+
+function removeBook(title){
+    
+const index = library.findIndex(book => book.title.toLowerCase() === title.toLowerCase());
+
+    if (index !== -1) {
+      library.splice(index, 1);
+      alert(`"${title}" has been removed from the library.`);
     } else {
       alert("Book not found.");
     }
 
 }
+
 while(running){
     const choice=prompt(`
         Book Tracker
         1.Add Book
         2.List Books
         3.Mark Book As Read
-        4.Exit
+        4.Remove Book from list
+        5.Exit
         Enter Your Choice:`);
 
 switch(choice){
@@ -59,6 +78,10 @@ switch(choice){
         markAsRead(title);
         break;
     case "4":
+        const removetitle= prompt("Enter the Book title to remove from the list:")
+        removeBook(removetitle);
+        break;
+    case "5":
         running=false;
         alert("Good Bye!");
         break;
