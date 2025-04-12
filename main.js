@@ -1,16 +1,41 @@
 const library = [];
-const book={
-    Title,
-    Author,
-    isRead
-};
-function addBook(){
+let running=true;
 
+function addBook(){
+    const title = prompt("Enter the book title:");
+    const author = prompt("Enter the book author:");
+    const isReadInput = prompt("Have you read this book before? (yes/no):").toLowerCase();
+    const isRead = isReadInput == "yes";
+    const book={
+    title: title,
+    author: author,
+    isRead: isRead
+};
+    library.push(book);        
+    alert(`"${title}" by ${author} has been added to your library.`);
 }
 function listBooks(){
-
+    
+    if (library.length ==0) {
+        alert("No books in the library.");
+      }
+    else {
+        let message = "Your Library List:\n";
+        library.forEach((book, index) => {
+            message += `${index + 1}. "${book.title}" by ${book.author} - ${book.isRead ? "Read" : "Unread"}\n`;
+        });
+        alert(message);
+      }
 }
 function markAsRead(title){
+    const book = library.find(book => book.title.toLowerCase() === title.toLowerCase());
+
+    if (book) {
+      book.isRead = true;
+      alert(`"${book.title}" is marked as read.`);
+    } else {
+      alert("Book not found.");
+    }
 
 }
 while(running){
@@ -30,7 +55,7 @@ switch(choice){
         listBooks();
         break;
     case "3":
-        prompt("Enter the title of the book to mark as read:");
+        const title= prompt("Enter the title of the book to mark as read:");
         markAsRead(title);
         break;
     case "4":
