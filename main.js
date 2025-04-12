@@ -63,7 +63,7 @@ switch(choice){
         alert("Good Bye!");
         break;
     default:
-        alert("Invalid Choice")
+        alert("Invalid Choice");
 }
 
 }
